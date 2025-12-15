@@ -99,8 +99,7 @@
     nixos-wsl,
     nixos-raspberrypi,
     adwaita_hypercursor,
-  
-      claude,
+    claude,
     rust-overlay,
     ...
   }: let hostIps = {
