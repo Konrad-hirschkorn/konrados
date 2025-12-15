@@ -3,6 +3,10 @@
   pkgs,
   ...
 }: let
+  unstable = import pkgs.inputs.nixpkgs-unstable {
+    inherit (pkgs) system;
+    config.allowUnfree = true;
+  };
   # Standard host Rust toolchain, extended with RISC-V target for ESP32-H2 cross-compilation
   rustToolchain = pkgs.rust-bin.nightly.latest.default.override {
     targets = ["riscv32imac-unknown-none-elf"];
@@ -11,7 +15,7 @@
   rustAnalyzer = pkgs.rust-bin.stable.latest.rust-analyzer;
 in {
   environment.systemPackages = with pkgs; [
-    coder
+    unstable.coder
     haskellPackages.cabal-install
     glib-networking
     libcanberra-gtk2

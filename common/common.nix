@@ -52,6 +52,10 @@ in {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.download-buffer-size = 524288000;
 
+  nixpkgs.config.allowInsecure = [
+    "terraform-1.14.0"
+  ];
+
   # HIER: unsicheres Paket erlauben
 
 
