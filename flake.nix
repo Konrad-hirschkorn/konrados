@@ -3,7 +3,17 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11"; # Stable channel for everything else
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # Unstable channel
     nixos-wsl.url = "github:nix-community/NixOS-WSL"; # NixOS WSL
-    nixpkgs-oldvscode.url = "github:NixOS/nixpkgs/333d19c8b58402b94834ec7e0b58d83c0a0ba658"; # vscode 1.98.2
+# Beispiel für eine Ihrer Host-Dateien, z.B. hosts/konrad-laptop.nix
+{ pkgs, ... }: {
+  # ... andere Konfigurationen
+
+  environment.systemPackages = [
+    # ... andere Pakete
+    pkgs.vscode  # Stellt sicher, dass die aktuelle VS Code Version installiert wird
+  ];
+
+  # ...
+}
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak";
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
@@ -88,7 +98,6 @@
     self,
     nixpkgs-stable,
     nixpkgs-unstable,
-    nixpkgs-oldvscode,
     flatpaks,
     disko,
     alejandra,
@@ -164,7 +173,6 @@
           disko.nixosModules.disko
           flatpaks.nixosModule
           vscode-server.nixosModules.default
-nixpkgs-oldvscode.url = "github:NixOS/nixpkgs/333d19c8b58402b94834ec7e0b58d83c0a0ba658"; # vscode 1.98.2
           ({
             config,
             pkgs,
