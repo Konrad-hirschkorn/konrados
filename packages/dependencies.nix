@@ -2,13 +2,21 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  # Standard host Rust toolchain, extended with RISC-V target for ESP32-H2 cross-compilation
+  rustToolchain = pkgs.rust-bin.nightly.latest.default.override {
+    targets = ["riscv32imac-unknown-none-elf"];
+    extensions = ["rust-src" "rustfmt" "clippy"];
+  };
+  rustAnalyzer = pkgs.rust-bin.stable.latest.rust-analyzer;
+in {
   environment.systemPackages = with pkgs; [
+    coder
     haskellPackages.cabal-install
     glib-networking
     libcanberra-gtk2
     libdvdcss
-    vaapiVdpau
+    libva-vdpau-driver
     libva-utils
     pipewire
     socat
@@ -35,12 +43,13 @@
     jdk
     python3
     python3Packages.pip
+    python3Packages.universal-silabs-flasher
     phpPackages.composer
     go
     gtk4.dev
     gobject-introspection
     gjs
-    julia
+    # julia
     libadwaita
     libinput
     lld
@@ -86,18 +95,22 @@
     vimPlugins.nvim-treesitter-parsers.markdown_inline
     vimPlugins.mini-nvim
     pyright
-    rust-analyzer
+    rustAnalyzer
     prettierd
     eslint_d
     pkg-config
     gobject-introspection
-    rustc
-    cargo
-    rustfmt
-    clippy
+    # ESP32-H2 tooling
+    espflash
+    ldproxy
+    openocd
+    probe-rs-tools
+    minicom
+    rustToolchain
     cargo-edit
     cargo-tauri
     cargo-expand
+    cargo-generate
     sqlite
     at-spi2-atk
     atkmm
@@ -114,5 +127,6 @@
     pango.dev
     webkitgtk_4_1
     zlib
+    # zlib.dev
   ];
 }

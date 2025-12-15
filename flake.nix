@@ -1,69 +1,82 @@
 {
   inputs = {
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    nixpkgs-oldvscode.url = "github:NixOS/nixpkgs/333d19c8b58402b94834ec7e0b58d83c0a0ba658";
-    flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/v3.1.0";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11"; # Stable channel for everything else
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # Unstable channel
+    nixos-wsl.url = "git+ssh://git@github.com/nix-community/NixOS-WSL.git"; # NixOS WSL
+    nixpkgs-oldvscode.url = "github:NixOS/nixpkgs/333d19c8b58402b94834ec7e0b58d83c0a0ba658"; # vscode 1.98.2
+    flatpaks.url = "git+ssh://git@github.com/in-a-dil-emma/declarative-flatpak.git";
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
     alejandra = {
-      url = "github:kamadorueda/alejandra/4.0.0";
+      # Nix formatter -> https://drakerossman.com/blog/overview-of-nix-formatters-ecosystem
+      url = "git+ssh://git@github.com/kamadorueda/alejandra.git?ref=refs/tags/4.0.0";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     astal = {
-      url = "github:aylur/astal";
+      url = "git+ssh://git@github.com/aylur/astal.git";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     ags = {
-      url = "github:aylur/ags";
+      url = "git+ssh://git@github.com/aylur/ags.git";
       inputs.nixpkgs.follows = "nixpkgs-stable";
       inputs.astal.follows = "astal";
     };
 
     adwaita_hypercursor = {
-      url = "github:dp0sk/Adwaita-HyprCursor";
+      url = "git+ssh://git@github.com/dp0sk/Adwaita-HyprCursor.git";
       flake = false;
     };
 
     claude = {
-      url = "github:k3d3/claude-desktop-linux-flake";
+      url = "git+ssh://git@github.com/k3d3/claude-desktop-linux-flake.git";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     disko = {
-      url = "github:nix-community/disko";
+      url = "git+ssh://git@github.com/nix-community/disko.git";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     sops-nix = {
-      url = "github:Mic92/sops-nix";
+      url = "git+ssh://git@github.com/Mic92/sops-nix.git";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     vscode-server = {
-      url = "github:nix-community/nixos-vscode-server";
+      url = "git+ssh://git@github.com/nix-community/nixos-vscode-server.git";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     firefox-gnome-theme = {
-      url = "github:rafaelmardojai/firefox-gnome-theme";
+      url = "git+ssh://git@github.com/rafaelmardojai/firefox-gnome-theme.git";
       flake = false;
     };
 
     tim-nvim = {
-      url = "github:timlisemer/nvim";
+      url = "git+ssh://git@github.com/timlisemer/nvim.git";
       flake = false;
+    };
+
+    restic-backup-service = {
+      url = "git+ssh://git@github.com/timlisemer/restic-backup-service.git";
+      # url = "path:/home/tim/Coding/Other/restic-backup-service"; # for local development
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
   };
 
+  # Optional: Binary cache for the nixos-raspberrypi flake
   nixConfig = {
     extra-substituters = ["https://nixos-raspberrypi.cachix.org"];
     extra-trusted-public-keys = [
@@ -86,11 +99,11 @@
     nixos-wsl,
     nixos-raspberrypi,
     adwaita_hypercursor,
-    tim-nvim,
-    claude,
+  
+      claude,
+    rust-overlay,
     ...
-  }: let
-    hostIps = {
+  }: let hostIps = {
       "konrad-laptop" = "10.0.0.25";
       "konrad-pc" = "10.0.0.3";
       "konrad-server" = "142.132.234.128";
@@ -99,7 +112,6 @@
       "traefik.local.yakweide.de" = "10.0.0.2";
       "pihole.local.yakweide.de" = "10.0.0.2";
     };
-
     users = {
       konrad = {
         fullName = "Konrad Hirschkorn";
@@ -111,24 +123,23 @@
         ];
       };
     };
-
-    userBackupDirs = ["Coding" "Downloads" "Desktop" "Documents" "Pictures" "Videos" "Music" "Public" "Templates"];
-    userDotFiles = [".config" ".mozilla" ".bash_history" ".steam" ".vscode-server" ".arduinoIDE" ".npm" ".vscode"];
+    userBackupDirs = ["Coding" "Desktop" "Documents" "Pictures" "Videos" "Music" "Public" "Templates"];
+    userDotFiles = [".config" ".mozilla" ".bash_history" ".steam" ".vscode-server" ".npm" ".vscode" ".local/share/kicad"];
+    systemFiles = ["/var/lib/homeassistant"];
     backupPaths = builtins.concatLists (builtins.map (
       username: let
         h = "/home/${username}/";
       in
         (map (dir: "${h}${dir}") userBackupDirs)
         ++ (map (dir: "${h}${dir}") userDotFiles)
+        ++ systemFiles
     ) (builtins.attrNames users));
   in {
     mkSystem = {
       hostFile,
       system,
       disks ? null,
-      hostName,
-      users,
-      backupPaths,
+      hostName
     }:
       nixpkgs-stable.lib.nixosSystem {
         inherit system;
@@ -144,9 +155,9 @@
             users
             hostName
             hostIps
-            backupPaths
-            ;
+            backupPaths;
 
+          # This node’s own IP
           ip = hostIps.${hostName};
         };
 
@@ -164,8 +175,6 @@
         system = "x86_64-linux";
         disks = ["/dev/nvme0n1"];
         hostName = "konrad-laptop";
-        backupPaths = backupPaths;
-        inherit users;
       };
 
       konrad-pc = self.mkSystem {
@@ -173,8 +182,6 @@
         system = "x86_64-linux";
         disks = ["/dev/nvme0n1" "/dev/nvme1n1"];
         hostName = "konrad-pc";
-        backupPaths = backupPaths;
-        inherit users;
       };
 
       konrad-server = self.mkSystem {
@@ -182,24 +189,18 @@
         system = "x86_64-linux";
         disks = ["/dev/sda"];
         hostName = "konrad-server";
-        backupPaths = backupPaths;
-        inherit users;
       };
 
       konrad-wsl = self.mkSystem {
         hostFile = ./hosts/konrad-wsl.nix;
         system = "x86_64-linux";
         hostName = "konrad-wsl";
-        backupPaths = backupPaths;
-        inherit users;
       };
 
       konrad-pi4 = self.mkSystem {
         hostFile = ./hosts/rpi4.nix;
         system = "aarch64-linux";
         hostName = "konrad-pi4";
-        backupPaths = backupPaths;
-        inherit users;
       };
 
       greeter = self.mkSystem {
@@ -207,8 +208,6 @@
         system = "x86_64-linux";
         disks = ["/dev/sda"];
         hostName = "greeter";
-        backupPaths = backupPaths;
-        inherit users;
       };
 
       homeassistant-yellow = let

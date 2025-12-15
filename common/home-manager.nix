@@ -25,46 +25,24 @@ in {
   ];
 
   # Home Manager individual user configuration
-  home-manager.users = lib.mapAttrs (_name: user:
-    {
-      home.stateVersion = "25.05";
-
-      programs.git = {
-        enable = true;
-        userName = user.gitUsername;
-        userEmail = user.gitEmail;
-        extraConfig = {
-          init.defaultBranch = "main";
-          safe.directory = ["/etc/nixos" "/tmp/NixOs"];
-          pull.rebase = "true";
-          push.autoSetupRemote = true;
-          core.autocrlf = "input";
-          core.eol = "lf";
-        };
-      };
-
-      home.file = {
-        ".config/hypr/hyprland.conf" = {
-          source = builtins.toPath ../files/hypr/hyprland.conf;
-          force = true;
-        };
-      };
-    }
-    // (lib.optionalAttrs isHomeAssistant {
-      systemd.user.services.konrad-server-tunnel = {
-        Unit = {
-          Description = "Persistent SSH tunnel to konrad-server";
-        };
-        Install = {
-          WantedBy = ["default.target"];
-        };
-        Service = {
-          ExecStartPre = "${pkgs.coreutils}/bin/chmod 600 %h/.ssh/id_ed25519";
-          ExecStart = "${pkgs.openssh}/bin/ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -N -i %h/.ssh/id_ed25519 -R *:8123:localhost:8123 -L 0.0.0.0:9001:konrad-server:9001 konrad@konrad-server";
-          Restart = "always";
-          RestartSec = "5s";
-        };
-      };
-    }))
-  users;
-}
+  home-manager.users =
+    lib.mapAttrs (
+      _name: user: {
+        lib,
+        pkgs,
+        ...
+      }: (
+        {
+          programs.git = {
+            enable = true;
+            settings = {
+              user.name = user.gitUsername;
+              user.email = user.gitEmail;
+              init.defaultBranch = "main";
+              safe.directory = ["/etc/nixos" "/tmp/NixOs"];
+              pull.rebase = "true";
+              push.autoSetupRemote = true;
+              core.autocrlf = "input";
+              core.eol = "lf";
+            };
+          };

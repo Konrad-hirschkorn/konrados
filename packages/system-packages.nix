@@ -1,3 +1,4 @@
+
 {
   config,
   inputs,
@@ -13,11 +14,12 @@ in {
   environment.systemPackages = with pkgs; [
     adw-gtk3
     alejandra
+    autossh
     awscli2
     dbus
     nautilus-open-any-terminal
     syncthing
-    vaapiVdpau
+    libva-vdpau-driver
     comfortaa
     pciutils
     bat
@@ -37,7 +39,7 @@ in {
     gamemode
     gamescope
     unzip
-    justbuild
+    # justbuild
     pulseaudio
     sockdump
     nix-prefetch
@@ -56,26 +58,30 @@ in {
     distrobox
     dive
     i2c-tools
-    unstable.gemini-cli
+    # unstable.gemini-cli
     unstable.claude-code
+    unstable.qwen-code
+    unstable.cursor-cli
     unstable.codex
+    unstable.code-cursor
     liquidctl
-    glxinfo
+    mesa-demos
     jq
     libglvnd
     mesa
     nixpkgs-fmt
     xorg.libxcb
     openal
+    lsof
     rpiboot
+    psmisc
     screen
     spice
     # spice-gtk
     sqlite
+    tcpdump
     virt-viewer
     libvirt
     virt-manager
-    wireguard-ui
-    iptables
   ];
 }
