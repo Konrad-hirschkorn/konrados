@@ -176,15 +176,11 @@
             ];
           })
           (sops-nix.nixosModules.sops) # sops-nix Modul importieren
+          # sops-nix Konfiguration
           ({
-            # sops-nix Konfiguration
-            # sops.age.keyFile = "/var/lib/sops/age/keys.txt"; # This is the default
-            sops.age.sshKeyPaths = [
-              # Standardpfad für die meisten Systeme
-              "/etc/ssh/ssh_host_ed25519_key"
-              # Spezieller Pfad für die NixOS-Minimal-Installation
-              "/root/.ssh/id_ed25519"
-            ];
+            # Sage sops-nix, dass es den Standard-AGE-Schlüssel des Systems verwenden soll.
+            # Dieser Schlüssel muss auf dem Zielsystem unter /var/lib/sops/age.key liegen.
+            sops.age.keyFile = "/var/lib/sops/age.key";
           })
           (import hostFile)
         ];
