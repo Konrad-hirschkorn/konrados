@@ -167,6 +167,14 @@
             pkgs,
             ...
           }: {nixpkgs.overlays = [inputs.rust-overlay.overlays.default];})
+          ({
+            # Allow insecure packages globally for this system
+            config.nixpkgs.config.allowInsecure = [
+              "terraform-1.14.0" # For coder
+              "steam-1.0.0.85"
+              "intune-portal"
+            ];
+          })
           (import hostFile)
         ];
       };
