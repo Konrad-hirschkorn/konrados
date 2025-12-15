@@ -25,7 +25,7 @@
     };
 
     adwaita_hypercursor = {
-      url = "git+ssh://git@github.com/dp0sk/Adwaita-HyprCursor.git";
+      url = "github:dp0sk/Adwaita-HyprCursor";
       flake = false;
     };
 
