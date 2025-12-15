@@ -9,10 +9,6 @@
     config = {allowUnfree = true;};
     inherit system;
   };
-  pkgs = import inputs.nixpkgs-stable {
-    config = {allowUnfree = true;};
-    inherit system;
-  };
 in {
   environment.systemPackages = with pkgs; [
     steam
