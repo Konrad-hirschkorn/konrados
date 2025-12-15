@@ -1,5 +1,5 @@
 creation_rules:
-  - path_regex: secrets/.*\.yaml$
+  - path_regex: secrets[\\/].*\.yaml$
     key_groups:
       - age:
           # Ihr persönlicher Schlüssel, damit Sie die Datei bearbeiten können
