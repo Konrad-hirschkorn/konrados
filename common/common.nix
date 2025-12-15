@@ -53,7 +53,8 @@ in {
   nix.settings.download-buffer-size = 524288000;
 
   nixpkgs.config.allowInsecure = [
-    "terraform-1.14.0"
+    "terraform-1.14.0" # For coder
+    "steam-1.0.0.85"
   ];
 
   # HIER: unsicheres Paket erlauben
