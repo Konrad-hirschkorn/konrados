@@ -178,8 +178,7 @@
           (sops-nix.nixosModules.sops) # sops-nix Modul importieren
           ({
             # sops-nix Konfiguration
-            sops.defaultSopsFile = ../secrets/secrets.yaml;
-            sops.age.keyFile = "/var/lib/sops/age/keys.txt";
+            # sops.age.keyFile = "/var/lib/sops/age/keys.txt"; # This is the default
             sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
           })
           (import hostFile)
