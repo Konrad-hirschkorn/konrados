@@ -43,7 +43,6 @@ in {
     SGX_ENCLAVE_SIZE = "4G";
     RUST_MIN_STACK = "268435456";
     QT_QPA_PLATFORM = "wayland";
-    NIXPKGS_ALLOW_UNFREE = "1";
     WEBKIT_DISABLE_DMABUF_RENDERER = "1";
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
     BLESH_PATH = "${pkgs.blesh}/share/blesh";
@@ -52,6 +51,8 @@ in {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.download-buffer-size = 524288000;
 
+  # Allow installation of unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   time.timeZone = "Europe/Berlin";
 
