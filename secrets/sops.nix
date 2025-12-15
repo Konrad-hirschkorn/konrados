@@ -13,11 +13,11 @@
   # sops.age.generateKey  = true;
 
   #sops.secrets.github_token = {};
-  sops.secrets.vaultwardenEnv = {};
-  sops.secrets.traefikENV = {};
-  sops.secrets.piholePWD = {};
-  sops.secrets.immichENV = {};
-  sops.secrets.wifiENV = {};
+  #sops.secrets.vaultwardenEnv = {};
+  #sops.secrets.traefikENV = {};
+  #sops.secrets.piholePWD = {};
+  #sops.secrets.immichENV = {};
+ # sops.secrets.wifiENV = {};
 
   # Template for nix.conf with GitHub token
   #sops.templates."nix-extra.conf" = {
