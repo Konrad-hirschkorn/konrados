@@ -164,6 +164,11 @@
           disko.nixosModules.disko
           flatpaks.nixosModule
           vscode-server.nixosModules.default
+          ({
+            config,
+            pkgs,
+            ...
+          }: {nixpkgs.overlays = [inputs.rust-overlay.overlays.default];})
           (import hostFile)
         ];
       };
