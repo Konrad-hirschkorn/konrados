@@ -3,7 +3,7 @@ creation_rules:
     key_groups:
       - age:
           # Ihr persönlicher Schlüssel, damit Sie die Datei bearbeiten können
-          - "age13sf35tlpdqw0hew930yyj4nt6nnsupv3gw6zxhj9k6vx9cykwuvs9u54tl"
+          - "age1v30cyk9yztwwkkaqyd2zfwv3vd5rcge5kykfm2x9q3kf99epdyfqlj2cxf"
           # Der öffentliche age-Schlüssel Ihres Hauptrechners
           - "age1c4gcs4uy9tnwk3uz370l3lhwv3lc3mgzt6up6qk64lfltnxg7ehs256njf"
           # Der öffentliche age-Schlüssel Ihres Laptops
