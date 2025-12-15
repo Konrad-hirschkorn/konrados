@@ -179,7 +179,12 @@
           ({
             # sops-nix Konfiguration
             # sops.age.keyFile = "/var/lib/sops/age/keys.txt"; # This is the default
-            sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+            sops.age.sshKeyPaths = [
+              # Standardpfad für die meisten Systeme
+              "/etc/ssh/ssh_host_ed25519_key"
+              # Spezieller Pfad für die NixOS-Minimal-Installation
+              "/root/.ssh/id_ed25519"
+            ];
           })
           (import hostFile)
         ];

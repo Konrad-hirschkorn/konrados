@@ -4,5 +4,7 @@ creation_rules:
       - age:
           # Ihr persönlicher Schlüssel, damit Sie die Datei bearbeiten können
           - "age13sf35tlpdqw0hew930yyj4nt6nnsupv3gw6zxhj9k6vx9cykwuvs9u54tl"
-          # Der öffentliche age-Schlüssel Ihres Hauptrechners (wird für die Installation auf dem Laptop nicht benötigt)
+          # Der öffentliche age-Schlüssel Ihres Hauptrechners
           - "age1c4gcs4uy9tnwk3uz370l3lhwv3lc3mgzt6up6qk64lfltnxg7ehs256njf"
+          # Der öffentliche age-Schlüssel Ihres Laptops
+          - "HIER_DEN_NEUEN_AGE_SCHLUESSEL_EINFUEGEN"
