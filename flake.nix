@@ -39,8 +39,8 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    sops-nix = { # This is a private repository, so we keep the SSH URL
-      url = "git+ssh://git@github.com/Mic92/sops-nix.git"; # This seems to be a private fork, keeping SSH
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
@@ -49,7 +49,7 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    vscode-server = { # This is a private repository, so we keep the SSH URL
+    vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
@@ -59,17 +59,17 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    firefox-gnome-theme = { # This is a private repository, so we keep the SSH URL
+    firefox-gnome-theme = {
       url = "github:rafaelmardojai/firefox-gnome-theme";
       flake = false;
     };
 
-    tim-nvim = { # This is a private repository, so we keep the SSH URL
+    tim-nvim = {
       url = "github:timlisemer/nvim";
       flake = false;
     };
 
-    restic-backup-service = { # This is a private repository, so we keep the SSH URL
+    restic-backup-service = {
       url = "github:timlisemer/restic-backup-service";
       # url = "path:/home/tim/Coding/Other/restic-backup-service"; # for local development
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -149,7 +149,7 @@
             inputs
             system
             home-manager
-            #adwaita_hypercursor
+            adwaita_hypercursor
             self
             nixos-raspberrypi
             users
