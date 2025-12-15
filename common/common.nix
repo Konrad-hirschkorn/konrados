@@ -55,7 +55,7 @@ in {
   nixpkgs.config.allowInsecure = [
     "terraform-1.14.0" # For coder
     "steam-1.0.0.85"
-    "intune-portal-version"
+    "intune-portal"
   ];
 
   # HIER: unsicheres Paket erlauben
