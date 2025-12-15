@@ -149,7 +149,7 @@
             inputs
             system
             home-manager
-            adwaita_hypercursor
+            #adwaita_hypercursor
             self
             nixos-raspberrypi
             users
