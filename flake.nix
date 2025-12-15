@@ -3,17 +3,6 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11"; # Stable channel for everything else
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # Unstable channel
     nixos-wsl.url = "github:nix-community/NixOS-WSL"; # NixOS WSL
-# Beispiel für eine Ihrer Host-Dateien, z.B. hosts/konrad-laptop.nix
-{ pkgs, ... }: {
-  # ... andere Konfigurationen
-
-  environment.systemPackages = [
-    # ... andere Pakete
-    pkgs.vscode  # Stellt sicher, dass die aktuelle VS Code Version installiert wird
-  ];
-
-  # ...
-}
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak";
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
