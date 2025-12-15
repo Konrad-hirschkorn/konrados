@@ -11,7 +11,7 @@
   };
 in {
   environment.systemPackages = with pkgs; [
-    steam
+    #steam
     wireshark
     # gnome-terminal
     ghostty
@@ -31,7 +31,7 @@ in {
     vlc
     showtime
     google-chrome
-    # discord
+    discord
     webcord-vencord
     # inputs.claude.packages.${system}.claude-desktop-with-fhs
     arduino-ide
