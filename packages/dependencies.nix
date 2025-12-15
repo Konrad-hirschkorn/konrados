@@ -1,9 +1,10 @@
 {
   config,
   pkgs,
+  inputs, # <--- inputs als Argument hinzufügen
   ...
 }: let
-  unstable = import pkgs.inputs.nixpkgs-unstable {
+  unstable = import inputs.nixpkgs-unstable { # <--- inputs direkt verwenden
     inherit (pkgs) system;
     config.allowUnfree = true;
   };
