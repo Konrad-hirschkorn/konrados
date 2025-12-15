@@ -28,9 +28,9 @@
   #  '';
   #};
 
-  sops.secrets.openvpn_ca = {owner = "nm-openvpn";};
-  sops.secrets.openvpn_extra_certs = {group = "nm-openvpn";};
-  sops.secrets.openvpn_cert = {group = "nm-openvpn";};
-  sops.secrets.openvpn_key = {group = "nm-openvpn";};
-  sops.secrets.openvpn_ta = {group = "nm-openvpn";};
+ # sops.secrets.openvpn_ca = {owner = "nm-openvpn";};
+ # sops.secrets.openvpn_extra_certs = {group = "nm-openvpn";};
+ # sops.secrets.openvpn_cert = {group = "nm-openvpn";};
+ #sops.secrets.openvpn_key = {group = "nm-openvpn";};
+ # sops.secrets.openvpn_ta = {group = "nm-openvpn";};
 }
