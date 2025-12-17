@@ -10,7 +10,7 @@
     defaultSopsFile = ./secrets.yaml;
     defaultSopsFormat = "yaml";
     age = {
-      sshKeyPaths = [ "/etc/ssh/nixos_personal_sops_key" ];
+    #  sshKeyPaths = [ "/etc/ssh/nixos_personal_sops_key" ];
       keyFile = "/home/konrad/.config/sops/age/keys.txt";
      # generateKey = true;
     };
