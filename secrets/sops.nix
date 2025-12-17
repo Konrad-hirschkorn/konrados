@@ -7,7 +7,7 @@
 }: {
   # sops encryption settings
   sops = {
-    defaultSopsFile = ./secrets.yaml;
+    defaultSopsFile = ./secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age = {
     #  sshKeyPaths = [ "/etc/ssh/nixos_personal_sops_key" ];
