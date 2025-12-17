@@ -180,7 +180,7 @@
           ({
             # Sage sops-nix, dass es den Standard-AGE-Schlüssel des Systems verwenden soll.
             # Dieser Schlüssel muss auf dem Zielsystem unter /var/lib/sops/age.key liegen.
-            sops.age.keyFile = "/var/lib/sops/age.key";
+           # sops.age.keyFile = "/var/lib/sops/age.key";
           })
           (import hostFile)
         ];
