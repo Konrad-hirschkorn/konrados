@@ -12,7 +12,7 @@
     age = {
     #  sshKeyPaths = [ "/etc/ssh/nixos_personal_sops_key" ];
       keyFile = "/home/konrad/.config/sops/age/keys.txt";
-     # generateKey = true;
+     generateKey = true;
     };
   };
 
