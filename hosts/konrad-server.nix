@@ -42,6 +42,15 @@
   # Machine specific configurations
   environment.variables.SERVER = "1";
 
+  # Enable OpenSSH service
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+      PermitRootLogin = "no";
+    };
+  };
+
   networking.networkmanager.insertNameservers = [
     "1.1.1.1" # Primary: Cloudflare DNS
     "8.8.8.8" # Backup: Google DNS
