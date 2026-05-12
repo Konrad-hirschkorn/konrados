@@ -160,7 +160,7 @@
 
         modules = [
           disko.nixosModules.disko
-          flatpaks.nixosModule
+          # flatpaks.nixosModule
           vscode-server.nixosModules.default
           ({
             config,

@@ -19,14 +19,23 @@
     ../packages/vscode.nix
     ../packages/system-packages.nix
     ../packages/dependencies.nix
-    (import ../common/home-manager.nix {
-      inherit config pkgs inputs home-manager lib users;
-      isDesktop = false;
-      isWsl = false;
-      isServer = true;
-      isHomeAssistant = false;
-    })
+    # (import ../common/home-manager.nix {
+    #   inherit config pkgs inputs home-manager lib users;
+    #   isDesktop = false;
+    #   isWsl = false;
+    #   isServer = true;
+    #   isHomeAssistant = false;
+    # })
   ];
+
+  # Define the 'konrad' user
+  users.users.konrad = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "docker" "networkmanager" ];
+    home = "/home/konrad";
+    hashedPassword = users.konrad.hashedPassword;
+    openssh.authorizedKeys.keys = users.konrad.authorizedKeys;
+  };
 
   # Fix shebangs in scripts
   services.envfs.enable = true;
