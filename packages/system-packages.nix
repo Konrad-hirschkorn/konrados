@@ -33,6 +33,7 @@ in {
     restic
     usbutils
     fastfetch
+    starship
     fd
     ffmpeg
     fzf
