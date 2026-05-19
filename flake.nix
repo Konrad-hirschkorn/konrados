@@ -6,6 +6,8 @@
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak";
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
+    antigravity-nix.url = "github:jacopone/antigravity-nix";
+
     alejandra = {
       # Nix formatter -> https://drakerossman.com/blog/overview-of-nix-formatters-ecosystem
       url = "github:kamadorueda/alejandra/4.0.0";
