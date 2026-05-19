@@ -99,6 +99,7 @@
     adwaita_hypercursor,
     claude,
     rust-overlay,
+    antigravity-nix,
     ...
   }: let hostIps = {
       "konrad-laptop" = "10.0.0.25";
@@ -117,6 +118,8 @@
         hashedPassword = "$6$Kz1nBiLtUiNHtmei$cMGqIjNE9zoWrY4wy5LQT7gI2aGXczlsQajTfkaFgkDmmipyEuAeIHUS1MsuanmJnjEEYXdfOnjaoSLRHHoSO1";
         authorizedKeys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID9CPAbuRYetl4yuI21KUL0DkDWm/a6XtElIrT497bjs KonradHirschkorn"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJf2kff45wxVNXGcntTK9tXo4nKunFi42AJHQN7Nc36m konrad@Konrad"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB9eAhRuYQXaozUSYmtMb8fd7IJ0wOHLDmcMRiFpCdu5 k0nr4@Konrad"
         ];
       };
     };
@@ -297,6 +300,11 @@
               ];
             })
           ];
+        };
+    };
+  };
+}
+         ];
         };
     };
   };

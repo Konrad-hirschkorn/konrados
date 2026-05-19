@@ -48,6 +48,10 @@ in {
     BLESH_PATH = "${pkgs.blesh}/share/blesh";
   };
 
+  environment.systemPackages = with pkgs; [
+    inputs.antigravity-nix.packages.${pkgs.system}.default
+  ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.download-buffer-size = 524288000;
 
